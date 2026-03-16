@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Ville;
 
@@ -24,6 +25,7 @@ class EtudiantFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'date_de_naissance' => $this->faker->date(),
             'ville_id' => Ville::inRandomOrder()->first()->id,
+            'user_id' => User::factory(),
         ];
     }
 }
