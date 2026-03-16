@@ -22,4 +22,9 @@ class Etudiant extends Model
     {
         return $this->belongsTo(Ville::class);
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }
