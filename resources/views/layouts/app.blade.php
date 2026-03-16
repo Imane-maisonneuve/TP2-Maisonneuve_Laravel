@@ -24,6 +24,14 @@
                     Nouveau
                 </a>
             </li>
+            <li class="nav-item">
+                @guest
+                <a class="nav-link" href="{{route('login')}}">@lang('Login')</a>
+                @else
+                <a class="nav-link" href="{{route('logout')}}">@lang('Logout')</a>
+                @endguest
+
+            </li>
         </ul>
     </header>
     <div class="container grow">

@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -27,38 +22,29 @@ class AuthController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|min:6|max:20'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $credentials = $request->only('email', 'password');
+        if (!Auth::validate($credentials)):
+            return redirect(route('login'))
+                ->withErrors(trans('auth.failed'))
+                ->withInput();
+        endif;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
+        Auth::login($user);
+        return redirect()->intended(route('etudiant.index'))->withSuccess('Connexion réussie');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
     {
-        //
+        Auth::logout();
+        return redirect(route('login'));
     }
 }

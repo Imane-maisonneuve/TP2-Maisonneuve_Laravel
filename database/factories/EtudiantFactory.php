@@ -25,7 +25,6 @@ class EtudiantFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'date_de_naissance' => $this->faker->date(),
             'ville_id' => Ville::inRandomOrder()->first()->id,
-            'user_id' => User::factory(),
         ];
     }
 }
