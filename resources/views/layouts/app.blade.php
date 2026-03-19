@@ -9,6 +9,7 @@
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+    @php $locale = session()->get('locale') @endphp
     <header class="bg-light py-4 mb-4 shadow-sm">
         <ul class="nav justify-content-center fs-4">
 
@@ -21,17 +22,34 @@
             <li class="nav-item">
                 <a class="nav-link pb-2 {{ request()->routeIs('etudiant.create') ? 'active text-decoration-underline link-offset-2' : '' }}"
                     href="{{ route('etudiant.create') }}">
-                    Nouveau
-                </a>
+                    Nouveau </a>
             </li>
             <li class="nav-item">
                 @guest
-                <a class="nav-link" href="{{route('login')}}">@lang('Login')</a>
+                <a class="nav-link pb-2 {{ request()->routeIs('login') ? 'active text-decoration-underline link-offset-2' : '' }}" href="{{route('login')}}">Se connecter</a>
                 @else
-                <a class="nav-link" href="{{route('logout')}}">@lang('Logout')</a>
+                <a class="nav-link pb-2 {{ request()->routeIs('logout') ? 'active text-decoration-underline link-offset-2' : '' }}" href="{{route('logout')}}">Se déconnecter</a>
                 @endguest
-
             </li>
+            <li class="nav-item">
+                @auth
+                <a class="nav-link pb-2 {{ request()->routeIs('forum.index') ? 'active text-decoration-underline link-offset-2' : '' }}" href="{{route('forum.index')}}">Forum</a>
+                @endauth
+            </li>
+            <li class="nav-item">
+                @auth
+                <a class="nav-link pb-2 {{ request()->routeIs('forum.user') ? 'active text-decoration-underline link-offset-2' : '' }}" href="{{route('forum.user')}}">Mon espace</a>
+                @endauth
+            </li>
+
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                    aria-expanded="false">@lang('Language') {{ $locale == '' ? "(en)" : "($locale)"}}</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{{route('lang', 'en')}}">@lang('English')</a></li>
+                    <li><a class="dropdown-item" href="{{route('lang', 'fr')}}">@lang('French')</a></li>
+                </ul>
+            </li> -->
         </ul>
     </header>
     <div class="container grow">
