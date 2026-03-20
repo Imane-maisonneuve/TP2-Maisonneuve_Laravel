@@ -30,15 +30,7 @@ class ForumController extends Controller
             ->join('users', 'forums.user_id', '=', 'users.id')
             ->where('forums.user_id', '=', Auth::user()->id)
             ->get();
-        return view('forum.user', ['forums' => $forums]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return view('user.index', ['forums' => $forums]);
     }
 
     /**
@@ -62,15 +54,7 @@ class ForumController extends Controller
             'createDate' => now(),
         ]);
 
-        return redirect()->route('forum.user')->with('success', 'L’article a été créé avec succès!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Forum $forum)
-    {
-        //
+        return redirect()->route('user.index')->with('success', 'L’article a été créé avec succès!');
     }
 
     /**
@@ -100,7 +84,7 @@ class ForumController extends Controller
             'article' => $request->article
         ]);
 
-        return redirect()->route('forum.user', $forum->id)->with('success', 'L’article a été mis à jour avec succès!');
+        return redirect()->route('user.index', $forum->id)->with('success', 'L’article a été mis à jour avec succès!');
     }
 
     /**
@@ -109,6 +93,6 @@ class ForumController extends Controller
     public function destroy(Forum $forum)
     {
         $forum->delete();
-        return redirect()->route('forum.user')->withSuccess('L’article est supprimé avec succès!');
+        return redirect()->route('user.index')->withSuccess('L’article est supprimé avec succès!');
     }
 }

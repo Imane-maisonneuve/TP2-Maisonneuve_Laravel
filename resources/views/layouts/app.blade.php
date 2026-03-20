@@ -38,18 +38,17 @@
             </li>
             <li class="nav-item">
                 @auth
-                <a class="nav-link pb-2 {{ request()->routeIs('forum.user') ? 'active text-decoration-underline link-offset-2' : '' }}" href="{{route('forum.user')}}">Mon espace</a>
+                <a class="nav-link pb-2 {{ request()->routeIs('repertoire.index') ? 'active text-decoration-underline link-offset-2' : '' }}"
+                    href="{{ route('repertoire.index') }}">
+                    Répertoire
+                </a>
                 @endauth
             </li>
-
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
-                    aria-expanded="false">@lang('Language') {{ $locale == '' ? "(en)" : "($locale)"}}</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{route('lang', 'en')}}">@lang('English')</a></li>
-                    <li><a class="dropdown-item" href="{{route('lang', 'fr')}}">@lang('French')</a></li>
-                </ul>
-            </li> -->
+            <li class="nav-item">
+                @auth
+                <a class="nav-link pb-2 {{ request()->routeIs('user.index') ? 'active text-decoration-underline link-offset-2' : '' }}" href="{{route('user.index')}}">Mon espace</a>
+                @endauth
+            </li>
         </ul>
     </header>
     <div class="container grow">
