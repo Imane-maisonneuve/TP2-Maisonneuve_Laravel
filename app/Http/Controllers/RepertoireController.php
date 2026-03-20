@@ -17,7 +17,7 @@ class RepertoireController extends Controller
         $repertoires = Repertoire::select('repertoires.*', 'users.name')
             ->join('users', 'repertoires.user_id', '=', 'users.id')
             ->orderBy('createDate', 'DESC')
-            ->paginate(5);
+            ->paginate(2);
 
         return view('repertoire.index', ['repertoires' => $repertoires]);
     }

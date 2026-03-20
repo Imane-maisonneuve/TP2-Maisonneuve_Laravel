@@ -39,6 +39,6 @@
 </table>
 
 <div class="mt-3">
-    {{ $repertoires->links() }}
+    {{ $repertoires->links('pagination::simple-bootstrap-5') }}
 </div>
 @endsection

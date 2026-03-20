@@ -20,7 +20,7 @@ class UserController extends Controller
             ->join('users', 'repertoires.user_id', '=', 'users.id')
             ->where('repertoires.user_id', '=', Auth::user()->id)
             ->orderBy('createDate', 'DESC')
-            ->paginate(5, ['*'], 'documents_page');
+            ->get();
 
         return view('user.index', ['forums' => $forums, 'repertoires' => $repertoires]);
     }
